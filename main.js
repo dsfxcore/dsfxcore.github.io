@@ -54,11 +54,24 @@ window.addEventListener('DOMContentLoaded', () => {
   const audio = document.getElementById('bg-audio');
   let entered  = false;
 
-  // Pre-load during intro so there's no buffering delay on click
-  audio.src    = 'assets/background.mp3';
+  // Auto-detect format: FLAC preferred, falls back to MP3
+  // Drop either assets/background.flac or assets/background.mp3 (or both)
   audio.loop   = true;
   audio.volume = 1;
-  audio.load();
+
+  const canFlac = audio.canPlayType('audio/flac') !== '';
+  const sources = canFlac
+    ? ['assets/background.flac', 'assets/background.mp3']
+    : ['assets/background.mp3', 'assets/background.flac'];
+
+  let srcIndex = 0;
+  function tryNextSource () {
+    if (srcIndex >= sources.length) return;
+    audio.src = sources[srcIndex++];
+    audio.load();
+  }
+  audio.addEventListener('error', () => tryNextSource());
+  tryNextSource();
 
   function enter () {
     if (entered) return;
