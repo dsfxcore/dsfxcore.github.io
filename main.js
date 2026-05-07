@@ -4,7 +4,7 @@
 
 /* ── 1. TITLE GLITCH ──────────────────────────────── */
 (function () {
-  const BASE    = 'dsfx.core/';
+  const BASE    = 'dsfx.core';
   const GLITCH  = '!@#$%&*Х×✕▓░╬╪≠≡∂∆';
   let settled   = false;
 
