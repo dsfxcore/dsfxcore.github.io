@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dsfx.core/</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- INTRO SCREEN -->
+  <div id="intro-screen">
+    <span id="intro-text">hello</span>
+  </div>
+
+  <!-- BACKGROUND LAYERS -->
+  <div id="bg-video-wrap">
+    <video id="bg-video" autoplay muted loop playsinline>
+      <source src="assets/background.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <canvas id="nfs-canvas"></canvas>
+
+  <!-- COLOR PICKER BUTTON -->
+  <div id="color-btn-wrap">
+    <button id="color-toggle-btn" title="Change accent color">◈</button>
+    <div id="color-panel">
+      <span class="panel-label">Accent</span>
+      <div class="swatch-row">
+        <button class="swatch" data-color="#ffffff" style="background:#ffffff"></button>
+        <button class="swatch" data-color="#ff6b6b" style="background:#ff6b6b"></button>
+        <button class="swatch" data-color="#ffd93d" style="background:#ffd93d"></button>
+        <button class="swatch" data-color="#6bcb77" style="background:#6bcb77"></button>
+        <button class="swatch" data-color="#4d96ff" style="background:#4d96ff"></button>
+        <button class="swatch" data-color="#c77dff" style="background:#c77dff"></button>
+        <button class="swatch" data-color="#ff9a3c" style="background:#ff9a3c"></button>
+        <button class="swatch" data-color="#00f5d4" style="background:#00f5d4"></button>
+      </div>
+      <label class="hex-label">
+        <span>#</span>
+        <input type="text" id="hex-input" maxlength="6" placeholder="fafafa" />
+      </label>
+      <button id="hex-apply">Apply</button>
+    </div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <main id="main-card">
+
+    <!-- AVATAR + NICK -->
+    <div class="avatar-wrap">
+      <img id="avatar-img" src="assets/pfp.png" alt="avatar"
+           onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2250%22 fill=%22%23222%22/><text x=%2250%22 y=%2262%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22%23555%22>✦</text></svg>'" />
+    </div>
+    <div class="nick-wrap">dsfx</div>
+
+    <!-- STATUS BADGE -->
+    <div class="status-box">
+      <span class="trans-flag" aria-label="transgender flag">
+        <!-- Transgender flag: blue / pink / white / pink / blue -->
+        <svg width="26" height="18" viewBox="0 0 26 18" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:2px">
+          <rect width="26" height="3.6" y="0"    fill="#55CDFC"/>
+          <rect width="26" height="3.6" y="3.6"  fill="#F7A8B8"/>
+          <rect width="26" height="3.6" y="7.2"  fill="#FFFFFF"/>
+          <rect width="26" height="3.6" y="10.8" fill="#F7A8B8"/>
+          <rect width="26" height="3.6" y="14.4" fill="#55CDFC"/>
+        </svg>
+      </span>
+      <span class="she-her">she/her</span>
+    </div>
+
+    <!-- MUSIC WIDGET -->
+    <!-- ════════════════════════════════════════════════════
+         ТРЕК: отредактируй прямо здесь
+         track-name   → название трека
+         track-artist → исполнитель
+         Файлы в assets/: background.mp3, cover.png
+         ════════════════════════════════════════════════════ -->
+    <div class="music-widget" id="music-widget">
+      <div class="widget-inner">
+        <img id="track-cover" src="assets/cover.png" alt="cover"
+             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 60 60%22><rect width=%2260%22 height=%2260%22 rx=%226%22 fill=%22%23222%22/><text x=%2230%22 y=%2237%22 font-size=%2222%22 text-anchor=%22middle%22 fill=%22%23444%22>♪</text></svg>'" />
+        <div class="track-info">
+          <div class="track-name" id="track-name">Track Title</div>
+          <div class="track-artist" id="track-artist">Artist Name</div>
+          <div class="track-controls">
+            <button id="play-pause-btn" title="Play / Pause">▶</button>
+            <div class="progress-wrap" id="progress-wrap">
+              <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <span class="track-time" id="track-time">0:00</span>
+          </div>
+        </div>
+      </div>
+      <audio id="bg-audio" loop></audio>
+    </div>
+
+    <!-- SOCIAL ICONS -->
+    <nav class="social-nav">
+      <a href="https://github.com/" target="_blank" rel="noopener" class="soc-btn" data-tip="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3C5.37.3 0 5.67 0 12.3c0 5.3 3.44 9.8 8.2 11.38.6.1.83-.26.83-.57v-2c-3.34.72-4.04-1.6-4.04-1.6-.54-1.38-1.33-1.74-1.33-1.74-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.06 1.82 2.8 1.3 3.48.99.1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.9 1.23 3.22 0 4.6-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .31.22.68.83.56C20.56 22.1 24 17.6 24 12.3 24 5.67 18.63.3 12 .3z"/></svg>
+      </a>
+      <a href="https://discord.com/" target="_blank" rel="noopener" class="soc-btn" data-tip="Discord">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.37 3c-.21.38-.46.9-.63 1.3a18.27 18.27 0 0 0-5.48 0A13.5 13.5 0 0 0 8.63 3a19.73 19.73 0 0 0-4.96 1.38C.52 8.72-.32 12.97.1 17.16a19.9 19.9 0 0 0 6.07 3.07 15 15 0 0 0 1.3-2.12 13 13 0 0 1-2.05-.99c.17-.13.34-.26.5-.4a14.2 14.2 0 0 0 12.16 0c.16.14.33.27.5.4-.66.39-1.35.71-2.06.99a15 15 0 0 0 1.3 2.12 19.84 19.84 0 0 0 6.08-3.07c.5-4.9-.84-9.12-3.58-12.79zM8.01 14.6c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42c1.2 0 2.17 1.09 2.15 2.42 0 1.33-.95 2.42-2.15 2.42zm7.98 0c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42c1.2 0 2.17 1.09 2.15 2.42 0 1.33-.94 2.42-2.15 2.42z"/></svg>
+      </a>
+      <a href="https://youtube.com/" target="_blank" rel="noopener" class="soc-btn" data-tip="YouTube">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.38.45A3.02 3.02 0 0 0 .5 6.19C.06 8.04 0 12 0 12s.06 3.96.5 5.81a3.02 3.02 0 0 0 2.12 2.14C4.45 20.4 12 20.4 12 20.4s7.55 0 9.38-.45a3.02 3.02 0 0 0 2.12-2.14C23.94 15.96 24 12 24 12s-.06-3.96-.5-5.81zM9.75 15.52V8.48L15.83 12l-6.08 3.52z"/></svg>
+      </a>
+      <a href="https://bsky.app/" target="_blank" rel="noopener" class="soc-btn" data-tip="Bluesky">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163C6.9 2.163 2.163 6.9 2.163 12S6.9 21.837 12 21.837 21.837 17.1 21.837 12 17.1 2.163 12 2.163zm0 3.674c1.617 0 2.926 1.31 2.926 2.926 0 1.617-1.31 2.927-2.926 2.927s-2.926-1.31-2.926-2.927c0-1.616 1.31-2.926 2.926-2.926zm0 12.326a7.155 7.155 0 0 1-5.868-3.048c.03-1.946 3.912-3.015 5.868-3.015 1.948 0 5.838 1.07 5.868 3.015A7.155 7.155 0 0 1 12 18.163z"/></svg>
+      </a>
+      <a href="https://x.com/" target="_blank" rel="noopener" class="soc-btn" data-tip="X / Twitter">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </nav>
+
+  </main>
+
+  <!-- QUOTES -->
+  <div id="quotes-wrap">
+    <p id="quote-text"></p>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
